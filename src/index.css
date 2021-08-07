@@ -1,9 +1,69 @@
+body {
+    background-color: #0e0e0e;
+    overflow: hidden;
+}
+
 .App {
     display: grid;
     place-content: center;
     height: 100vh;
 }
+.game {
+    display: flex;
+    flex-direction: row;
+}
 .Board {
-    width: 80vh;
-    height: 80vh;
+    width: 720px;
+    height: 720px;
+    background-image: url("ChessBoard.jpg");
+    background-size: cover;
+}
+.MoveList {
+    width: 200px;
+    height: 720px;
+    background-color: #353535;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.Move {
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+.whitemove {
+    width: 50%;
+    text-align: center;
+}
+.blackmove {
+    width: 50%;
+    text-align: center;
+}
+.playerCards {
+    display: flex;
+    flex-direction: column;
+}
+.currPlayer {
+    background-color: #353535;
+    width: 200px;
+    height: 120px;
+    margin-top: 480px;
+    color: #d8d8d8;
+    font-size: 20pt;
+    text-align: center;
+}
+.oppPlayer {
+    height: 120px;
+    width: 200px;
+    background-color: #353535;
+    color: #d8d8d8;
+    font-size: 20pt;
+    text-align: center;
+}
+.playercard {
+    margin: auto;
+    margin-top: 50px;
+}
+.main {
+    display: flex;
+    flex-direction: row;
 }
