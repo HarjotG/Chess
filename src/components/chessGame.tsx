@@ -3,6 +3,11 @@ import { Chess } from "chess.ts";
 import Board from "./Board";
 import MoveList from "./moveList";
 
+//todo: make server
+//      take initial player color from server
+//      send player moves to server
+//      play opponents moves from server
+
 const ChessGame: React.FC = () => {
     const gameRef = useRef(new Chess());
     const [turn, setturn] = useState("white"); // to keep track of player turn
