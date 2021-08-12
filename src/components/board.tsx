@@ -3,15 +3,30 @@ import { Chess } from "chess.ts";
 import { Stage, Layer, Image } from "react-konva";
 import Piece from "./piece";
 import { KonvaEventObject } from "konva/lib/Node";
+import { socket } from "../socket";
+import { useParams } from "react-router-dom";
 
 interface Props {
     game: Chess;
     turn: string;
+    playerColor: "white" | "black";
     updateTurn: () => void;
 }
 const Board: React.FC<Props> = (props: Props) => {
+    const { gameid } = useParams<{ gameid: string }>();
     const { game, turn, updateTurn } = props;
     const selPos = useRef([0, 0]);
+
+    useEffect(() => {
+        socket.on("otherMoved", (move: { from: string; to: string; promotion: string }) => {
+            if (props.playerColor !== turn) {
+                if (game.move({ from: move.from, to: move.to, promotion: "q" }) !== null) {
+                    updateTurn();
+                }
+            }
+        });
+    });
+
     const handleDragStart = (e: KonvaEventObject<MouseEvent>) => {
         selPos.current = [e.target.x(), e.target.y()];
     };
@@ -35,11 +50,19 @@ const Board: React.FC<Props> = (props: Props) => {
     };
 
     const movePiece = (moveFrom: string, moveTo: string): boolean => {
+        if (turn !== props.playerColor) return false; // dont move unless it is the players turn to move
         let movelist = game.moves({ square: moveFrom });
         for (let i = 0; i < movelist.length; i++) {
             if (movelist[i].includes(moveTo)) {
                 // always promote to queen
                 game.move({ from: moveFrom, to: moveTo, promotion: "q" });
+                // tell the other player our move
+                socket.emit("playerMoved", {
+                    gameid: gameid,
+                    from: moveFrom,
+                    to: moveTo,
+                    promotion: "q",
+                });
                 return true;
             }
         }

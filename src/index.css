@@ -3,6 +3,17 @@ body {
     overflow: hidden;
 }
 
+h1,
+h2 {
+    color: white;
+    text-align: center;
+}
+
+textarea {
+    width: 540px;
+    height: 20px;
+}
+
 .App {
     display: grid;
     place-content: center;
