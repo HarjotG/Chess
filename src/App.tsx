@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ChessGame from './components/chessGame';
 import PlayerCard from './components/playerCard';
-import Home from './components/home';
+import Home from './components/Home';
 import WaitOpp from './components/waitOpp';
 import JoinGame from './components/joinGame';
 
