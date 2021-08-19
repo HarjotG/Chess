@@ -1,46 +1,47 @@
-import * as React from 'react';
-import { InteractiveLink } from '../ui/InteractiveLink';
-import { P } from '../ui/Paragraph';
-import { styled } from '../stitches.config';
+import React, { FormEvent, Fragment } from 'react';
+import { useState, useRef } from 'react';
+import { Redirect } from 'react-router-dom';
+import { socket } from '../socket';
+import { v4 as uuidv4 } from 'uuid';
 
-const LinkContainer = styled('span', {
-  display: 'block',
-  margin: '8px 0',
-});
+interface Props {
+  setUser: (name: string) => void;
+  oncreategame: () => void;
+}
 
-const RepoReadmeLink: React.VFC = () => (
-  <InteractiveLink href="https://github.com/rafgraph/spa-github-pages#readme">
-    repo readme
-  </InteractiveLink>
-);
+const Home: React.FC<Props> = (props: Props) => {
+  const [inputname, setInputname] = useState('');
+  const [gotname, setGotname] = useState(false);
+  const gameid = useRef(uuidv4()); // generate unique room id
 
-export const Home: React.VFC = () => (
-  <div>
-    <P>
-      This is an example single page app built with React and React&nbsp;Router
-      using <code>BrowserRouter</code>. Navigate with the links below and
-      refresh the page or copy/paste the url to test out the redirect
-      functionality deployed to overcome GitHub&nbsp;Pages incompatibility with
-      single page apps (like this one).
-    </P>
-    <P>
-      Please see the <RepoReadmeLink /> for instructions on how to use this
-      boilerplate to deploy your own single page app using GitHub Pages.
-    </P>
-    <P>
-      <LinkContainer>
-        <InteractiveLink to="/example">Example page</InteractiveLink>
-      </LinkContainer>
-      <LinkContainer>
-        <InteractiveLink to="/example/two-deep?field1=foo&field2=bar#boom!">
-          Example two deep with query and hash
-        </InteractiveLink>
-      </LinkContainer>
-    </P>
-    <P>
-      <InteractiveLink to="/sitemap-link-generator">
-        Sitemap Link Generator
-      </InteractiveLink>
-    </P>
-  </div>
-);
+  const updateName = (e: FormEvent<HTMLInputElement>) => {
+    setInputname(e.currentTarget.value);
+  };
+  const send = () => {
+    // emit event to server to make a new room with the game id
+    socket.emit('createNewGame', gameid.current.toString()); // create a new game with the given game id
+  };
+  const handleClick = () => {
+    props.setUser(inputname);
+    props.oncreategame();
+    setGotname(true);
+    send();
+  };
+  return (
+    <Fragment>
+      {gotname ? (
+        <Redirect to={'/game/' + gameid.current}></Redirect> // redirect to the game page when user inputs name
+      ) : (
+        <div>
+          <h1>Your Name:</h1>
+          <input onInput={updateName} />
+          <button disabled={!(inputname.length > 0)} onClick={handleClick}>
+            Submit
+          </button>
+        </div>
+      )}
+    </Fragment>
+  );
+};
+
+export default Home;
