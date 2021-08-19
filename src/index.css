@@ -78,3 +78,9 @@ textarea {
     display: flex;
     flex-direction: row;
 }
+.WinnerStatus {
+    text-align: center;
+    margin-top: 10%;
+    color: white;
+    font-size: large;
+}

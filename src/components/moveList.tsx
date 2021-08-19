@@ -3,6 +3,7 @@ import { Chess } from "chess.ts";
 
 interface Props {
     game: Chess;
+    winner?: string;
 }
 type move = {
     moveNum: number;
@@ -52,6 +53,7 @@ const MoveList: React.FC<Props> = (props: Props) => {
                     <MoveItem key={move.moveNum + move.moveWhite + move.moveBlack} move={move} />
                 );
             })}
+            {props.winner ? <div className="WinnerStatus">{props.winner}</div> : <React.Fragment />}
         </div>
     );
 };

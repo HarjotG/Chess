@@ -25,10 +25,23 @@ const ChessGame: React.FC<Props> = (props: Props) => {
             setturn("white");
         }
     };
+    // update status to winner etc.
+    let winner: string | undefined;
+    if (game.inCheckmate()) {
+        if (turn === "white") {
+            winner = "Black has won";
+        } else {
+            winner = "White has won";
+        }
+    } else if (game.inDraw()) {
+        winner = "Game in Draw";
+    } else if (game.inStalemate()) {
+        winner = "Game in Stalemate";
+    }
 
     return (
         <div className="game">
-            <MoveList game={game} />
+            <MoveList game={game} winner={winner} />
             <Board
                 game={game}
                 turn={turn}

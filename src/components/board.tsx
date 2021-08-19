@@ -17,6 +17,7 @@ const Board: React.FC<Props> = (props: Props) => {
     const { game, turn, updateTurn } = props;
     const selPos = useRef([0, 0]);
 
+    // for handling the other player moving
     useEffect(() => {
         socket.on("otherMoved", (move: { from: string; to: string; promotion: string }) => {
             if (props.playerColor !== turn) {
@@ -39,19 +40,36 @@ const Board: React.FC<Props> = (props: Props) => {
         } else {
             e.target.position({ x: selPos.current[0], y: selPos.current[1] }); // reset piece to the position it was at before
         }
-        // check for checkmate, stalemate etc
-        if (game.inCheckmate()) {
-            console.log("Checkmate!");
-        } else if (game.inDraw()) {
-            console.log("Game in draw");
-        } else if (game.inStalemate()) {
-            console.log("Game in stalemate");
-        }
     };
 
     const movePiece = (moveFrom: string, moveTo: string): boolean => {
         if (turn !== props.playerColor) return false; // dont move unless it is the players turn to move
         let movelist = game.moves({ square: moveFrom });
+        // check for castle. Only caste if trying to move king to either g1, or c1, or g8 or c8
+        if (movelist.includes("O-O") && (moveTo === "g1" || moveTo === "g8")) {
+            // always promote to queen
+            game.move({ from: moveFrom, to: moveTo, promotion: "q" });
+            // tell the other player our move
+            socket.emit("playerMoved", {
+                gameid: gameid,
+                from: moveFrom,
+                to: moveTo,
+                promotion: "q",
+            });
+            return true;
+        }
+        if (movelist.includes("O-O-O") && (moveTo === "c1" || moveTo === "c8")) {
+            // always promote to queen
+            game.move({ from: moveFrom, to: moveTo, promotion: "q" });
+            // tell the other player our move
+            socket.emit("playerMoved", {
+                gameid: gameid,
+                from: moveFrom,
+                to: moveTo,
+                promotion: "q",
+            });
+            return true;
+        }
         for (let i = 0; i < movelist.length; i++) {
             if (movelist[i].includes(moveTo)) {
                 // always promote to queen
