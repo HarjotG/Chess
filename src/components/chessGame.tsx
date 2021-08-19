@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Chess } from "chess.ts";
-import Board from "./Board";
+import Board from "./board";
 import MoveList from "./moveList";
 import { socket } from "../socket";
 
