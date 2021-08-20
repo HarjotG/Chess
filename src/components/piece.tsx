@@ -38,12 +38,30 @@ const Piece = (props: Props) => {
 };
 
 const pieceImgs = {
-  p: ['Chess_plt45.svg', 'Chess_pdt45.svg'],
-  n: ['Chess_nlt45.svg', 'Chess_ndt45.svg'],
-  b: ['Chess_blt45.svg', 'Chess_bdt45.svg'],
-  r: ['Chess_rlt45.svg', 'Chess_rdt45.svg'],
-  q: ['Chess_qlt45.svg', 'Chess_qdt45.svg'],
-  k: ['Chess_klt45.svg', 'Chess_kdt45.svg'],
+  p: [
+    'https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/c/c7/Chess_pdt45.svg',
+  ],
+  n: [
+    'https://upload.wikimedia.org/wikipedia/commons/7/70/Chess_nlt45.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/e/ef/Chess_ndt45.svg',
+  ],
+  b: [
+    'https://upload.wikimedia.org/wikipedia/commons/b/b1/Chess_blt45.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/9/98/Chess_bdt45.svg',
+  ],
+  r: [
+    'https://upload.wikimedia.org/wikipedia/commons/7/72/Chess_rlt45.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/f/ff/Chess_rdt45.svg',
+  ],
+  q: [
+    'https://upload.wikimedia.org/wikipedia/commons/1/15/Chess_qlt45.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/4/47/Chess_qdt45.svg',
+  ],
+  k: [
+    'https://upload.wikimedia.org/wikipedia/commons/4/42/Chess_klt45.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/f/f0/Chess_kdt45.svg',
+  ],
 };
 
 export default Piece;
