@@ -24,7 +24,7 @@ module.exports = {
       { test: /\.(tsx?|js)$/, exclude: /node_modules/, loader: 'ts-loader' },
       { test: /\.js$/, loader: 'source-map-loader' },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
-      { test: /\.(png|jpe?g|gif)$/i, loader: 'file-loader' },
+      { test: /\.(png|jpe?g|gif|svg)$/i, loader: 'file-loader' },
     ],
   },
 
