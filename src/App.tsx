@@ -32,7 +32,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Router>
+      <Router basename="/Chess">
         <Switch>
           <Route path="/" exact>
             <Home setUser={setUser} oncreategame={handlecreategame} />

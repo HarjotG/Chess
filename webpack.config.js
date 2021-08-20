@@ -1,6 +1,9 @@
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
+  watchOptions: {
+    poll: true,
+  },
   entry: `${__dirname}/src/index.tsx`,
   output: {
     path: `${__dirname}/build`,
