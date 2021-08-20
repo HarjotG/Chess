@@ -24,7 +24,7 @@ const WaitOpp: React.FC<Props> = (props: Props) => {
       <h1>Waiting for opponent to join game...</h1>
       <h2>Send this link to your friend:</h2>
       <textarea
-        value={'http://localhost:3000/game/' + gameid}
+        value={'https://harjotg.github.io/Chess/game/' + gameid}
         readOnly
       ></textarea>
     </div>
