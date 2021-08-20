@@ -38,12 +38,12 @@ const Piece = (props: Props) => {
 };
 
 const pieceImgs = {
-  p: ['../img/Chess_plt45.svg', '../img/Chess_pdt45.svg'],
-  n: ['../img/Chess_nlt45.svg', '../img/Chess_ndt45.svg'],
-  b: ['../img/Chess_blt45.svg', '../img/Chess_bdt45.svg'],
-  r: ['../img/Chess_rlt45.svg', '../img/Chess_rdt45.svg'],
-  q: ['../img/Chess_qlt45.svg', '../img/Chess_qdt45.svg'],
-  k: ['../img/Chess_klt45.svg', '../img/Chess_kdt45.svg'],
+  p: ['./img/Chess_plt45.svg', './img/Chess_pdt45.svg'],
+  n: ['./img/Chess_nlt45.svg', './img/Chess_ndt45.svg'],
+  b: ['./img/Chess_blt45.svg', './img/Chess_bdt45.svg'],
+  r: ['./img/Chess_rlt45.svg', './img/Chess_rdt45.svg'],
+  q: ['./img/Chess_qlt45.svg', './img/Chess_qdt45.svg'],
+  k: ['./img/Chess_klt45.svg', './img/Chess_kdt45.svg'],
 };
 
 export default Piece;
